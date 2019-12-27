@@ -1,0 +1,56 @@
+web_authenticate:
+  path: /authenticate
+  defaults: { _controller: App\Controller\Security\AuthenticationController::webAuthenticateAction }
+
+send_email_change_password:
+  path: /send-email-change-password
+  defaults: { _controller: App\Controller\Security\UserController::sendMessageForRecoverPassword }
+
+recover_password:
+  path: /recover_password/{token}
+  defaults: { _controller: App\Controller\Security\UserController::recoverPassword }
+
+send_email_change_email:
+  path: /send_email_change_email
+  defaults: { _controller: App\Controller\Security\UserController::sendMessageForChangeEmail }
+
+change_email:
+  path: /change_email/{token}
+  defaults: { _controller: App\Controller\Security\UserController::changeEmail }
+
+web_logout:
+  path: /logout
+  defaults: { _controller: App\Controller\Security\AuthenticationController::logout }
+
+web_registration:
+  path: /registration
+  defaults: { _controller: App\Controller\Security\RegistrationController::registrationAction }
+
+fb_registration:
+  path: /fb_registration
+  defaults: { _controller: App\Controller\Security\RegistrationController::fbRegistrationAction }
+
+user_activate:
+  path: /registration_confirm/{token}
+  defaults: { _controller: App\Controller\Security\RegistrationController::registrationConfirm }
+
+index_page:
+  path: /
+  defaults: { _controller: App\Controller\DefaultController::indexAction }
+
+change_languages:
+  path: /change_languages
+  defaults: { _controller: App\Controller\DefaultController::changeLanguageAction }
+
+change_password:
+  path: /change_password/{token}
+  defaults: { _controller: App\Controller\Security\UserController::changePassword }
+  methods: [POST]
+
+fb-callback:
+  path: /fb-callback
+  defaults: { _controller: App\Controller\DefaultController::fbCallback }
+
+test:
+  path: /test
+  defaults: { _controller: App\Controller\DefaultController::test }

@@ -1,0 +1,4 @@
+mobile_api_endpoint:
+  path: /api/v2
+  defaults: { _controller: App\MobileController\AuthController::index }
+  methods: [POST]

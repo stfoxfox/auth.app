@@ -1,0 +1,18 @@
+{
+  "files.exclude": {
+    "public/bundles/": "explorerExcludedFiles",
+    "var/": "explorerExcludedFiles",
+    "vendor/": "explorerExcludedFiles",
+    ".idea/": "explorerExcludedFiles",
+    "node_modules/": "explorerExcludedFiles",
+    "public/build/": "explorerExcludedFiles",
+    "npm-debug.log": "explorerExcludedFiles",
+    "yarn-error.log": "explorerExcludedFiles",
+    ".phpunit": "explorerExcludedFiles",
+    "phpunit.xml": "explorerExcludedFiles",
+    ".web-server-pid": "explorerExcludedFiles",
+    "composer.phar": "explorerExcludedFiles",
+    ".dapp_secret_key": "explorerExcludedFiles",
+    ".dappfile.render.yaml": "explorerExcludedFiles"
+  }
+}

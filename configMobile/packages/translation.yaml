@@ -1,0 +1,4 @@
+framework:
+    default_locale: '%env(resolve:LOCATE)%'
+    translator:
+        fallbacks: ['%env(resolve:LOCATE)%']

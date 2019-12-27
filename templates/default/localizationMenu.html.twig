@@ -1,0 +1,14 @@
+<form class="lang-block" id="language-form" action="{{ path('change_languages') }}" method="post">
+    <input name="language" id="language-field" type="hidden">
+    <ul class="lang-block_list">
+        <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="overflow-y: scroll; max-height: none;" tabindex="0">
+            <div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+                {% for code, name in languages %}
+                    <li class="lang-block_item">
+                        <a href="" class="lang-block_link" data-val="{{ code }}">{{ name|capitalize }}</a>
+                    </li>
+                {% endfor %}
+            </div>
+        </div>
+    </ul>
+</form>

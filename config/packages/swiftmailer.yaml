@@ -1,0 +1,9 @@
+swiftmailer:
+    url:              '%env(resolve:MAIL_URL)%'
+    username:         '%env(resolve:FROM_EMAIL)%'
+    password:         '%env(resolve:MAIL_PASSWORD)%'
+    host:             '%env(resolve:MAIL_HOST)%'
+    port:             '%env(resolve:MAIL_PORT)%'
+    encryption:       '%env(resolve:MAIL_ENCRYPTION)%' 
+    auth-mode:        login
+    spool: { type: 'memory' }

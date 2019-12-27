@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/user-profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style-reload.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/form-group-style.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/checkRequiredFields.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/changePassword.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+    {% include 'default/changePasswordPopup.html.twig' %}
+
+    {% include 'default/changeEmailPopup.html.twig' %}
+
+    <div class="container">
+
+        <h3>{% trans %}Hello{% endtrans %}!!!</h3>
+
+        <h4>Это страница для зарегистрированных пользователей</h4>
+
+        <button data-toggle="modal" data-target="#changePasswordModal">{{ 'Change password'|trans }}</button>
+
+        <button data-toggle="modal" data-target="#changeEmailModal">{{ 'Change email address'|trans }}</button>
+
+        <br><br>
+
+        <a href="{{ path('web_logout') }}">{{ 'Exit'|trans }}</a>
+
+    </div>
+
+{% endblock %}
+

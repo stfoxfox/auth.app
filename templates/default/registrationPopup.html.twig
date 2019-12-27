@@ -1,0 +1,106 @@
+<div id="registrationModal" class="modal in" role="dialog">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div id="register-popup">
+
+                <div id="register_form_block">
+
+                    <div class="register-title">{{ 'Free registration'|trans }}</div>
+
+                    {{ form_start(registrationForm) }}
+
+                    <div class="form-group_row clearfix">
+
+                        <div class="form-group half left">
+                            {{ form_label(registrationForm.name) }}
+                            <div class="input text required">
+                                {{ form_widget(registrationForm.name) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group half right">
+                            {{ form_label(registrationForm.surname) }}
+                            <div class="input text required">
+                                {{ form_widget(registrationForm.surname) }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group_row clearfix">
+
+                        <div class="form-group">
+                            {{ form_label(registrationForm.email) }}
+                            <div class="input text required">
+                                <span {% if error is defined and error.location == 'EMAIL_REGISTRATION' %}
+                                    class="d-inline-block" data-placement="bottom"
+                                    data-content='{{ error.data|trans }}'
+                                        {% endif %}>
+                                {{ form_widget(registrationForm.email) }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(registrationForm.password) }}
+                            <div class="input password required">
+                                <span {% if error is defined and error.location == 'PASSWORD_REGISTRATION' %}
+                                    class="d-inline-block" data-placement="bottom"
+                                    data-content='{{ error.data|trans }}'
+                                        {% endif %}>
+                                {{ form_widget(registrationForm.password) }}
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="register-fb">
+                        {{ 'or'|trans }} <a href="{{ fbLoginUrl }}"><span class="register-fb_btn"></span></a>
+                    </div>
+
+                    {{ form_widget(registrationForm.submit) }}
+
+                    {% set termsConditions %}
+                        <a href="#" target="_blank"
+                           style="text-decoration: underline;">{{ 'Terms and Conditions,'|trans }}</a>
+                    {% endset %}
+
+                    {% set termsPrivacyPolicy %}
+                        <a href="#" target="_blank"
+                           style="text-decoration: underline;">{{ 'Privacy Policy'|trans }}</a>
+                    {% endset %}
+
+                    {% set byClickingNext %}
+                        {{ 'By clicking on the \"Next\" button, you are accepting and agreeing with our %s and you are acknowledging that you have read our%s.'|trans }}
+                    {% endset %}
+
+                    {% autoescape false %}
+                        <p class="register-descr">
+                            {{ byClickingNext|format(termsConditions, termsPrivacyPolicy) }}
+                        </p>
+                    {% endautoescape %}
+
+                    {{ form_end(registrationForm) }}
+
+                </div>
+
+                <button title="Close (Esc)" type="button" class="mfp-close" data-dismiss="modal">×</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% if error is defined and
+    (error.location == 'EMAIL_REGISTRATION' or
+    error.location == 'PASSWORD_REGISTRATION') %}
+    <script>
+        $('#registrationModal').modal('show');
+    </script>
+{% endif %}

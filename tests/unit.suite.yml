@@ -1,0 +1,14 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit or integration tests.
+
+actor: UnitTester
+modules:
+    enabled:
+        - Symfony:
+            part: SERVICES
+            app_path: 'src'
+        - Asserts
+        - Doctrine2:
+            depends: Symfony
+        - App\Tests\Helper\Unit

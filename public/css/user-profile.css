@@ -1,0 +1,38 @@
+.modal-content {
+    border-radius: 8px !important;
+}
+
+.modal-dialog {
+    top: 10%;
+    left: 0;
+    right: 0;
+    position: fixed;
+}
+
+h1 {
+    color: #313131;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    margin: 23px 0 27px 0;
+    line-height: 42px;
+    word-wrap: break-word;
+}
+
+.btn.disabled {
+    cursor: default!important;
+    border-color: #dedede!important;
+    background: #fff!important;
+    color: #a4a4a4!important;
+}
+
+.modal-body {
+    background: #e9ebf2;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+swiftmailer:
+    # transport:        smtp
+    url:              smtp://smtp.yandex.ru:587?encryption=ssl&auth_mode=login&password=.TWwFV3GpWrek&username=k8s@konstruktor.com
+    # username:         v4yav@yandex.ru
+    # password:         123123123F
+    # host:             localhost
+    # port:             465
+    # encryption:       ssl
+    # auth-mode:        login
+    # spool: { type: 'memory' }
+    stream_options:
+        ssl:
+            allow_self_signed: true
+            verify_peer: false
+            verify_peer_name: false

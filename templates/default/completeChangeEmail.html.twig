@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h3>{{ result.data }}</h3>
+
+        <br>
+
+        <a href="{{ path('index_page') }}">{{ 'Main page'|trans }}</a>
+
+    </div>
+
+{% endblock %}
+

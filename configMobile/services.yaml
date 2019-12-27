@@ -1,0 +1,112 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: '%env(resolve:LOCATE)%'
+    security_salt: '%env(resolve:SECURITY_SALT)%'
+    fbid: '%env(resolve:FBID)%'
+    fbsecret: '%env(resolve:FBSECRET)%'
+    fburl: '%env(resolve:FBURL)%'
+    cookie_domain: '%env(resolve:COOCKIE_DOMAIN)%'
+    authentication_cookie_name: '%env(resolve:AUTENTICATION_COOKIE_NAME)%'
+    token_lifetime: '%env(resolve:TOKEN_LIFETIME)%'
+    length_password: '%env(resolve:LENGTH_PASSWORD)%'
+    from_email: '%env(resolve:FROM_EMAIL)%'
+    site_domain: '%env(resolve:SITE_DOMAIN)%'
+    application: 'Mobile Api Application'
+    cookie_language: '%env(resolve:COOKIE_LANGUAGE)%'
+
+    app_locales: afr|alb|apd|ara|arm|aze|baq|bel|ben|bos|bul|bur|cat|ceb|cym|
+                cze|dut|eng|epo|est|fin|fre|geo|ger|gle|glg|gre|guj|hat|hau|
+                heb|hin|hmn|hrv|hun|ibo|ice|ind|isl|ita|jav|jpn|kan|kat|kaz|
+                khm|kor|lao|lat|lav|lit|lzh|mac|mal|mao|mar|may|mkd|mlg|mlt|
+                mon|msa|nep|nld|nor|nya|pan|per|pol|por|ron|rum|rus|sin|slk|
+                slv|som|sot|spa|srp|swa|swe|tai|tam|tel|tgk|tgl|tha|tur|ukr|
+                urd|uzb|vie|yid|yor|zho|zul
+
+
+#snc_redis:
+#  clients:
+#    default:
+#      type: predis
+#      alias: default
+#      dsn: redis://localhost
+#  session:
+#    client: session
+#    ttl: 600
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{MobileController,DependencyInjection,Entity,Migrations,Tests,Service,MobileKernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\MobileController\:
+        resource: '../src/MobileController'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    security.authentication.service:
+            class: App\Service\Security\AuthenticationService
+            public: true
+            arguments: ["@service_container"]
+
+    security.authorization.service:
+            class: App\Service\Security\AuthorizationService
+            public: true
+            arguments: ["@service_container"]
+
+    security.registration.service:
+            class: App\Service\Security\RegistrationService
+            public: true
+            arguments: ["@service_container"]
+
+    security.encoder.service:
+            class: App\Service\Security\EncoderService
+            public: true
+            arguments: ["@service_container"]
+
+    security.user.service:
+            class: App\Service\Security\UserService
+            public: true
+            arguments: ["@service_container"]
+
+    security.token.service:
+            class: App\Service\Security\TokenService
+            public: true
+            arguments: ["@service_container"]
+
+    security.role.service:
+            class: App\Service\Security\RoleService
+            public: true
+            arguments: ["@service_container"]
+
+    app.language.service:
+            class: App\Service\LanguageService
+            public: true
+            arguments: ["@service_container"]
+
+    service.http.request:
+        class: App\Service\Http\Request
+        public: true
+        arguments: ["@service_container"]
+
+    service.mobile.request:
+        class: App\Service\MobileRequest
+        public: true
+        arguments: ["@service_container"]  

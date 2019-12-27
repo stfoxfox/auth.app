@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/register-popup.css') }}">
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/checkRequiredFields.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/index.js') }}"></script>
+    <script>
+    {% if send_message_response is defined %}
+    $(document).ready(function () {
+        alert('{{ send_message_response.data|trans }}');
+    });
+    
+    {% endif %}
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    {% include 'default/registrationPopup.html.twig' %}
+    {% include 'default/recoverPasswordPopup.html.twig' %}
+
+    <div class="container">
+
+        <div class="front-header">
+
+            <a class="logo-company">
+                <img src="{{ asset('img/logo2.png') }}" class="logo-image">
+            </a>
+
+            <div class="login_form_block hidable">
+
+                <div class="login_form_fb">
+                    <a href={{fbLoginUrl}}><span class="fb_login"></span></a>
+                    {{ 'or'|trans }}
+                </div>
+
+                {{ form_start(loginForm, {'attr': {'class': 'form-fields'}}) }}
+                <div class="login_form-row">
+                    <div class="input text required">
+                            <span {% if error is defined and error.location == 'AUTHENTICATION' %}
+                                class="d-inline-block" data-placement="left"
+                                data-content='{{ error.data|trans }}'
+                                    {% endif %}>
+                                {{ form_widget(loginForm.email) }}
+                            </span>
+                    </div>
+                </div>
+
+                <div class="login_form-row">
+                    <div class="input password required">
+                        {{ form_widget(loginForm.password) }}
+                    </div>
+                    <a class="remind-pass" href="#" data-toggle="modal" data-target="#passwordModal">
+                        {{ 'Recover Password'|trans }}
+                    </a>
+                </div>
+
+                <div class="login_form-row">
+                    {{ form_widget(loginForm.submit) }}
+                </div>
+
+                {{ form_end(loginForm) }}
+            </div>
+
+        </div>
+
+        <div class="front-content">
+
+            <div class="front-content_title">{{'Fulfill your dream'|trans}}</div>
+
+            <div class="front-content_body">
+                {{ 'Join our community of creative individuals from all around the globe.'|trans }}
+                {{ 'Create and Collaborate'|trans }}
+            </div>
+
+            <a href="#register-popup" class="register-btn" data-toggle="modal" data-target="#registrationModal">
+                {{ 'Build a dream'|trans }}
+            </a>
+            <a href="#" class="login-btn">{{ 'Log into your account'|trans }}</a>
+
+        </div>
+    </div>
+
+    {% include 'default/footer.html.twig' %}
+    {% include 'default/localizationMenu.html.twig' %}
+
+{% endblock %}
